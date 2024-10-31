@@ -1,0 +1,87 @@
+.chat-container {
+    width: 100%;
+    max-width: 98vw;
+    margin: 0 auto;
+    padding: 0 1vw;
+    background-color: #f9f9f9;
+}
+
+h2{
+    padding-left: 10px;
+}
+
+.chat-box {
+    height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column; /* Ensure messages stack vertically */
+    align-items: flex-start; /* Align all messages to the left by default */
+}
+
+.message {
+    padding: 10px;
+    border-radius: 8px; /* Rounded corners for message boxes */
+    margin-bottom: 5px;
+    animation: floatIn 0.5s ease-in; /* Float-in animation */
+    max-width: 80%; /* Limit width of messages */
+    word-wrap: break-word; /* Allow long words to break */
+}
+
+.user {
+    align-self: flex-end; /* Align user messages to the right */
+    background-color: #e1f5fe; /* Light blue background for user messages */
+}
+
+.bot {
+    align-self: flex-start; /* Align bot messages to the left */
+    background-color: #e8f5e9; /* Light green background for bot messages */
+}
+
+@keyframes floatIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+form {
+    display: flex;
+    padding: 0 10px 10px 10px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #007bff;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

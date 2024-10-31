@@ -1,0 +1,83 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, #4c9f70, #78c5d5);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  nav h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #ffdd57;
+  }
+  
+  .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .profile-image:hover {
+    transform: scale(1.1);
+  }
+  
+  button {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #ffdd57;
+    color: #333;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  
+    nav h1 {
+      font-size: 1.5rem;
+    }
+  
+    nav a {
+      font-size: 1rem;
+    }
+  
+    button {
+      font-size: 1rem;
+    }
+  }
+  
