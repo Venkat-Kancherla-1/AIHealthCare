@@ -14,12 +14,16 @@ const HealthCareCenter = () => {
     const newMessages = [...messages, { sender: 'user', text: userInput }];
     setMessages(newMessages);
     setUserInput('');
-
+    const token = localStorage.getItem('token');
+    
     try {
       // Send the entire conversation history to the backend
       const response = await fetch('http://localhost:5000/api/chat/aichat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ 
           messages: newMessages, // Send all messages to the backend
           userMessage: userInput // Also send the new user message

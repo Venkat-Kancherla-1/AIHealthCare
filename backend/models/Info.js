@@ -5,6 +5,7 @@ const InfoSchema = new mongoose.Schema({
   completed: { type: Number, required: true},
   age: {type: Number, required: true},
   height: {type: Number, required: true},
+  gender: {type: String, required: true},
   weight: {type: Number, required: true},
   medicalConditions: {type: String, required: true},
   allergies : {type: String, required: true},
