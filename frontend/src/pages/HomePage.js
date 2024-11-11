@@ -3,11 +3,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/HomePage.css';
 import HealthCareCenterIcon from '../assets/health-care.jpg';
-import MealPlannerIcon from '../assets/meal-planner.jpg';
 import MedicalRemaniderIcon from '../assets/medical-remainder.jpg';
 import DiseasePredictionIcon from '../assets/disease-prediction.jpg';
 import DailyActivityIcon from '../assets/daily-activity.jpg';
-import CaloryIcon from '../assets/calory-calculator.jpg';
 
 
 function HomePage() {
@@ -32,18 +30,18 @@ function HomePage() {
           <img src={DiseasePredictionIcon} alt="Disease Prediction" />
           <p>Disease Prediction</p>
         </div>
-        <div className="button-item" onClick={() => handleNavigation('/todays-meal')}>
+        {/* <div className="button-item" onClick={() => handleNavigation('/todays-meal')}>
           <img src={MealPlannerIcon} alt="Today's Meal" />
           <p>Today's Meal</p>
-        </div>
+        </div> */}
         <div className="button-item" onClick={() => handleNavigation('/medicine-manager')}>
           <img src={MedicalRemaniderIcon} alt="Medicine Manager" />
           <p>Medicine Manager</p>
         </div>
-        <div className="button-item" onClick={() => handleNavigation('/calory-intake-calculator')}>
+        {/* <div className="button-item" onClick={() => handleNavigation('/calory-intake-calculator')}>
           <img src={CaloryIcon} alt="Calory Intake Calculator" />
           <p>Calory Intake Calculator</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

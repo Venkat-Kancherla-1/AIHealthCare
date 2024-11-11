@@ -9,9 +9,9 @@ import CompleteProfile from './pages/CompleteProfile';
 import HealthCareCenter from './pages/HealthCareCenter';
 import DailyActivityPlanner from './pages/DailyActivityPlanner';
 import DiseasePrediction from './pages/DiseasePrediction';
-import TodaysMeal from './pages/TodaysMeal';
+// import TodaysMeal from './pages/TodaysMeal';
 import MedicineManager from './pages/MedicineManager';
-import CaloryIntakeCalculator from './pages/CaloryIntakeCalculator';
+// import CaloryIntakeCalculator from './pages/CaloryIntakeCalculator';
 
 function App() {
   return (
@@ -25,9 +25,9 @@ function App() {
         <Route path="/healthcare-center" element={<HealthCareCenter />} />
         <Route path="/daily-activity-planner" element={<DailyActivityPlanner />} />
         <Route path="/disease-prediction" element={<DiseasePrediction />} />
-        <Route path="/todays-meal" element={<TodaysMeal />} />
+        {/* <Route path="/todays-meal" element={<TodaysMeal />} /> */}
         <Route path="/medicine-manager" element={<MedicineManager />} />
-        <Route path="/calory-intake-calculator" element={<CaloryIntakeCalculator />} />
+        {/* <Route path="/calory-intake-calculator" element={<CaloryIntakeCalculator />} /> */}
       </Routes>
     </BrowserRouter>
   );
