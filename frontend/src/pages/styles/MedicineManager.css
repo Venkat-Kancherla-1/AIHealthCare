@@ -1,0 +1,28 @@
+.medicine-manager {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .add-medicine-form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .add-medicine-form input, .add-medicine-form button {
+    padding: 8px;
+  }
+  
+  .medicine-list {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .medicine-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  

@@ -2,9 +2,11 @@ const express = require('express');
 const User = require('../models/User');
 const Info = require('../models/Info');
 const ChatSummary = require('../models/ChatSummary');
+const Medicine = require('../models/Medicine');
 const router = express.Router();
 const { CohereClientV2 } = require('cohere-ai');
 const jwt = require('jsonwebtoken');
+const cron = require('node-cron');
 const Task = require('../models/Task');
 
 const authenticateToken = (req, res, next) => {
@@ -419,6 +421,76 @@ router.post('/update', authenticateToken, async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+router.post('/set-medicine-reminder', authenticateToken, async (req, res) => {
+  const { medicineName, time } = req.body;
+  console.log(req.user.username);
+
+  const user = await User.findOne({ username: req.user.username });
+  if (!user) return res.status(404).json({ message: 'User not found' });
+  const email = user.email;
+
+  const reminder = new Medicine({
+    username: user.username,
+    email: email,
+    medicineName,
+    time,
+  });
+
+  try {
+    await reminder.save();
+    res.status(200).json({ message: 'Medicine reminder set successfully', reminder });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error setting reminder' });
+  }
+});
+
+
+router.get('/get-medicine-reminders', authenticateToken, async (req, res) => {
+  const user = await User.findOne({ username: req.user.username });
+
+  if (!user) return res.status(404).json({ message: 'User not found' });
+
+  try {
+    const reminders = await Medicine.find({ username: user.username });
+    res.status(200).json({ reminders });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error retrieving reminders' });
+  }
+});
+
+router.delete('/remove-medicine/:id', authenticateToken, async (req, res) => {
+  try {
+    const reminder = await Medicine.findByIdAndDelete(req.params.id);
+    if (!reminder) return res.status(404).json({ message: 'Reminder not found' });
+    res.status(200).json({ message: 'Reminder deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error deleting reminder' });
+  }
+});
+
+
+cron.schedule('* * * * *', async () => {
+  const now = new Date();
+  const currentTime = `${now.getHours()}:${now.getMinutes()}`;
+
+  const reminders = await Medicine.find({
+    time: currentTime,
+    completed: false
+  });
+
+  reminders.forEach(async reminder => {
+    console.log(`Reminder for ${reminder.username}: Take your ${reminder.medicineName} now.`);
+    console.log(reminder.email);
+    
+    reminder.completed = true;
+    await reminder.save();
+  });
+});
+
 
 
 module.exports = router;
