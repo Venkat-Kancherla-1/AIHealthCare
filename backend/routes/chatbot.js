@@ -8,6 +8,7 @@ const { CohereClientV2 } = require('cohere-ai');
 const jwt = require('jsonwebtoken');
 const cron = require('node-cron');
 const Task = require('../models/Task');
+const nodemailer = require('nodemailer');
 
 const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
@@ -475,19 +476,46 @@ router.delete('/remove-medicine/:id', authenticateToken, async (req, res) => {
 
 cron.schedule('* * * * *', async () => {
   const now = new Date();
-  const currentTime = `${now.getHours()}:${now.getMinutes()}`;
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const currentTime = `${hours}:${minutes}`;
 
   const reminders = await Medicine.find({
     time: currentTime,
-    completed: false
   });
+  console.log(reminders);
 
   reminders.forEach(async reminder => {
     console.log(`Reminder for ${reminder.username}: Take your ${reminder.medicineName} now.`);
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // use TLS
+      auth: {
+          user: process.env.gmail,
+          pass: process.env.password,
+      },
+      tls: {
+          rejectUnauthorized: false,
+      },
+  });
+  
+    const mailOptions = {
+        from: process.env.mail,
+        to: reminder.email,
+        subject: 'Remainder',
+        text: `Dear ${reminder.username},
+        Please take the medicine ${reminder.medicineName} at ${currentTime}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log('Verification email sent:', info.response);
+    });
+
     console.log(reminder.email);
-    
-    reminder.completed = true;
-    await reminder.save();
   });
 });
 

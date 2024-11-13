@@ -40,7 +40,7 @@ function Navbar() {
       
       {isAuthenticated ? (
         <>
-          <button onClick={() => navigate('/profile')}>
+          <button onClick={() => navigate('/complete-profile')}>
             <img src="path/to/profile-image.jpg" alt="Profile" className="profile-image" />
           </button>
           <button onClick={handleLogout}>Logout</button>
