@@ -9,6 +9,11 @@ const jwt = require('jsonwebtoken');
 const cron = require('node-cron');
 const Task = require('../models/Task');
 const nodemailer = require('nodemailer');
+const twilio = require('twilio');
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = twilio(accountSid, authToken);
 
 const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
@@ -430,10 +435,12 @@ router.post('/set-medicine-reminder', authenticateToken, async (req, res) => {
   const user = await User.findOne({ username: req.user.username });
   if (!user) return res.status(404).json({ message: 'User not found' });
   const email = user.email;
+  const number = user.number;
 
   const reminder = new Medicine({
     username: user.username,
     email: email,
+    number: number,
     medicineName,
     time,
   });
@@ -483,39 +490,55 @@ cron.schedule('* * * * *', async () => {
   const reminders = await Medicine.find({
     time: currentTime,
   });
-  console.log(reminders);
 
-  reminders.forEach(async reminder => {
+  reminders.forEach(async (reminder) => {
     console.log(`Reminder for ${reminder.username}: Take your ${reminder.medicineName} now.`);
+
+    // Ensure the phone number has the +91 prefix
+    const phoneNumber = `+91${reminder.number}`;
+
+    console.log(`Sending SMS to: ${phoneNumber}`);
+
+    // Send SMS using Twilio
+    client.messages
+      .create({
+        body: `Dear ${reminder.username}, Please take your medicine ${reminder.medicineName} now.`,
+        messagingServiceSid: 'MGf1e74899c13523414661c3a538b09737',
+        to: phoneNumber,
+      })
+      .then((message) => console.log(`SMS sent successfully: ${message.sid}`))
+      .catch((error) => console.error(`Failed to send SMS: ${error.message}`));
+
+    console.log(reminder.email);
+
+    // Sending email using nodemailer
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
       secure: false, // use TLS
       auth: {
-          user: process.env.gmail,
-          pass: process.env.password,
+        user: process.env.gmail,
+        pass: process.env.password,
       },
       tls: {
-          rejectUnauthorized: false,
+        rejectUnauthorized: false,
       },
-  });
-  
+    });
+
     const mailOptions = {
-        from: process.env.mail,
-        to: reminder.email,
-        subject: 'Remainder',
-        text: `Dear ${reminder.username},
-        Please take the medicine ${reminder.medicineName} at ${currentTime}`
+      from: process.env.mail,
+      to: reminder.email,
+      subject: 'Reminder',
+      text: `Dear ${reminder.username}, Please take your medicine ${reminder.medicineName} at ${currentTime}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-        }
-        console.log('Verification email sent:', info.response);
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent successfully:', info.response);
+      }
     });
-
-    console.log(reminder.email);
   });
 });
 

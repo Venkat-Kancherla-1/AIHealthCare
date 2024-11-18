@@ -4,7 +4,7 @@ const Info = require('../models/Info');
 const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, number, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -12,7 +12,7 @@ exports.signup = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, number, password: hashedPassword });
     const newInfo = new Info({username, completed:0, age:0, height:0, weight:0, medicalConditions:" ", allergies:" ", pregnant:false, 
       wakeup:" ", sleep:" ", smoke:false, drinks:false, diet:" ", foodTOAvoid:" ", physicalLimitations:" ", fitnessGoal:" "
     });
@@ -80,3 +80,33 @@ exports.getUserInfo = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+
+// exports.getUserInfo = async (req, res) => {
+//   try {
+//     const userInfo = await Info.findOne({ username: req.user.username });
+//     if (!userInfo) {
+//       return res.json({
+//         age: '',
+//         height: '',
+//         weight: '',
+//         gender: '',
+//         medicalConditions: '',
+//         allergies: '',
+//         pregnant: false,
+//         wakeup: '',
+//         sleep: '',
+//         smoke: false,
+//         drinks: false,
+//         diet: '',
+//         foodToAvoid: '',
+//         physicalLimitations: '',
+//         fitnessGoal: '',
+//       });
+//     }
+//     res.json(userInfo);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// };

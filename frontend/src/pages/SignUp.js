@@ -7,6 +7,7 @@ function SignUp() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
+    number: '',
     password: '',
     confirmPassword: '',
   });
@@ -37,6 +38,7 @@ function SignUp() {
         body: JSON.stringify({
           username: formData.username,
           email: formData.email,
+          number: formData.number,
           password: formData.password,
         }),
       });
@@ -66,6 +68,14 @@ function SignUp() {
           name="username"
           placeholder="Username"
           value={formData.username}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="number"
+          name="number"
+          placeholder="Mobile number"
+          value={formData.number}
           onChange={handleChange}
           required
         />
