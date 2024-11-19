@@ -71,10 +71,11 @@
   background-size: cover; 
     /* background-position: center; */
   display: flex;
+  min-height:85vh;
+  background-image: url('../../assets/1.jpg');
   flex-direction: column;
   align-items: center;
-  /* padding: 20px; */
-  /* margin-top: 60px; */
+  padding: 20px;
 }
 
 .button-grid {
