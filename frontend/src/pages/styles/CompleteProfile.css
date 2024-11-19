@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background-image: url('../../assets/2.jpg');
   background: linear-gradient(135deg, #4c9f70, #78c5d5);
   color: #333;
 }

@@ -1,6 +1,8 @@
 .medicine-manager {
     font-family: Arial, sans-serif;
     padding: 20px;
+    min-height:82vh;
+    background-image: url('../../assets/5.jpg');
   }
   
   .add-medicine-form {
