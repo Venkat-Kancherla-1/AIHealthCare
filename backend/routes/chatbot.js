@@ -364,7 +364,8 @@ router.post('/tasks', authenticateToken, async (req, res) => {
 
       Please respond with the task list in JSON format, structured according to the above categories without any extra messages, only the JSON.
       Be more specific in case of the tasks. Avoid tasks like join a gym and stick to home tasks and mention breifly and precisely what to for example 10minutes of yoga like this.
-      And in the json the names are fitness, diet, mental, symptom, disease, daily, habit with case sensitive and only give the json object without any other content`
+      And in the json the names are fitness, diet, mental, symptom, disease, daily, habit with case sensitive and only give the json object without any other content
+      Don't give any backticks at the start and end of the json`
     }
   ];
 
@@ -374,7 +375,8 @@ router.post('/tasks', authenticateToken, async (req, res) => {
       messages: taskGenerationMessage,
       temperature: 0.5
     });
-    // console.log(taskCompletion.message.content[0].text)
+    console.log(taskCompletion.message.content[0].text)
+
     generatedTasks = JSON.parse(taskCompletion.message.content[0].text);
     // console.log(generatedTasks);
 

@@ -16,7 +16,7 @@ function CompleteProfile() {
     smoke: false,
     drinks: false,
     diet: '',
-    foodToAvoid: '',
+    foodTOAvoid: '',
     physicalLimitations: '',
     fitnessGoal: '',
   });
@@ -143,8 +143,8 @@ function CompleteProfile() {
       <label htmlFor="diet">Diet Type</label>
       <input type="text" id="diet" name="diet" value={formData.diet || ''} onChange={handleChange} />
       
-      <label htmlFor="foodToAvoid">Food to Avoid</label>
-      <input type="text" id="foodToAvoid" name="foodToAvoid" value={formData.foodToAvoid || ''} onChange={handleChange} />
+      <label htmlFor="foodTOAvoid">Food to Avoid</label>
+      <input type="text" id="foodTOAvoid" name="foodTOAvoid" value={formData.foodTOAvoid || ''} onChange={handleChange} />
       
       <label htmlFor="physicalLimitations">Physical Limitations</label>
       <input type="text" id="physicalLimitations" name="physicalLimitations" value={formData.physicalLimitations || ''} onChange={handleChange} />

@@ -1,10 +1,12 @@
 import './Navbar.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+
 
 function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,21 +35,32 @@ function Navbar() {
     navigate('/signin');
   };
 
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   return (
-    <nav>
+    <nav className="navbar">
       <h1>Health Mate</h1>
-      <Link to="/">Home</Link>
-      
-      {isAuthenticated ? (
-        <>
-          <button onClick={() => navigate('/complete-profile')}>
-            <img src="path/to/profile-image.jpg" alt="Profile" className="profile-image" />
-          </button>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      ) : (
-        <button onClick={() => navigate('/signin')}>Sign In</button>
-      )}
+      <div className="menu-toggle" onClick={toggleNav}>
+        ☰
+      </div>
+      <ul className={`nav-links ${isNavOpen ? 'nav-links-open' : ''}`}>
+  <li><Link to="/">Home</Link></li>
+  {isAuthenticated ? (
+    <>
+      <li>
+        <Link to="/complete-profile"> Profile
+          {/* <img src="path/to/profile-image.jpg" alt="Profile" className="profile-image" /> */}
+        </Link>
+      </li>
+      <li><button onClick={handleLogout}>Logout</button></li>
+    </>
+  ) : (
+    <li><button onClick={() => navigate('/signin')}>Sign In</button></li>
+  )}
+</ul>
+
     </nav>
   );
 }

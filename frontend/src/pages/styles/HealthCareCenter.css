@@ -10,6 +10,10 @@ h2{
     padding-left: 10px;
 }
 
+body{
+    background-color: #f9f9f9;
+}
+
 .chat-box {
     height: 60vh;
     overflow-y: auto;
