@@ -375,7 +375,7 @@ router.post('/tasks', authenticateToken, async (req, res) => {
       messages: taskGenerationMessage,
       temperature: 0.5
     });
-    console.log(taskCompletion.message.content[0].text)
+    // console.log(taskCompletion.message.content[0].text)
 
     generatedTasks = JSON.parse(taskCompletion.message.content[0].text);
     // console.log(generatedTasks);
