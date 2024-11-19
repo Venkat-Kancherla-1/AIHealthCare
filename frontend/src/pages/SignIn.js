@@ -1,6 +1,6 @@
 // src/pages/SignIn.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './styles/SignIn.css';
 
 function SignIn() {
@@ -92,6 +92,9 @@ function SignIn() {
         />
         <button type="submit">Sign In</button>
       </form>
+      <p>
+        Doesn't have an account? <Link to="/signup">Sign Up</Link>
+      </p>
     </div>
   );
 }
