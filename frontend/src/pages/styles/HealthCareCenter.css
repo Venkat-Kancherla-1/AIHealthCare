@@ -1,11 +1,12 @@
 .chat-container {
+    background-color: #48B98F;
     width: 100%;
-    max-width: 98vw;
+    max-width: 97vw;
     margin: 0 auto;
     padding: 0 1vw;
-    background-color: #f9f9f9;
-    min-height:88.25vh;
-    background-image: url('../../assets/4.jpg');
+    /* background-color: #f9f9f9; */
+    min-height:90vh;
+    /* background-image: url('../../assets/4.jpg'); */
 }
 
 h2 {
@@ -18,10 +19,13 @@ h2 {
 
 
 body{
-    background-color: #f9f9f9;
+    background-color:#48B98F;
 }
 
 .chat-box {
+    background-image: url("../../assets/hand1.png");
+    background-position: center;
+    background-size: cover;
     height: 60vh;
     overflow-y: auto;
     margin-bottom: 10px;
