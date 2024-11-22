@@ -67,15 +67,15 @@
 
 /* Home Page */
 .home-page-container {
-  background-image: url("../../assets/homebg1.jpg");
+  background-image: url("../../assets/home.png");
   background-size: cover; 
-    /* background-position: center; */
+    background-position: center;
   display: flex;
-  min-height:85vh;
+  min-height:100vh;
   /* background-image: url('../../assets/1.jpg'); */
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .button-grid {
@@ -85,7 +85,7 @@
   width: 100%;
   max-width: 400px;
   margin-top: 35px;
-  padding:30px;
+  /* padding:30px; */
 }
 
 .button-item {
