@@ -67,11 +67,11 @@
 
 /* Home Page */
 .home-page-container {
-  background-image: url("../../assets/home.png");
+  background-image: url("../../assets/home1.png");
+  /* height:100vh; */
   background-size: cover; 
-    background-position: center;
   display: flex;
-  min-height:100vh;
+  min-height:88.5vh;
   /* background-image: url('../../assets/1.jpg'); */
   flex-direction: column;
   align-items: center;

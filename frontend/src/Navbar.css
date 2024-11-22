@@ -25,6 +25,9 @@
   margin: 0;
   padding: 0;
 }
+h1 a {
+  text-decoration: none;
+}
 
 .nav-links li {
   display: flex;

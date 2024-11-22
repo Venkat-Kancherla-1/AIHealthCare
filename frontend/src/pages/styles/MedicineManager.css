@@ -1,5 +1,10 @@
 .medicine-manager {
     font-family: Arial, sans-serif;
+    background-image: url("../../assets/medicine1.png");
+    background-size: cover; 
+    background-position: right;
+    height: auto;
+    width:auto;
     padding: 20px;
     min-height:82vh;
     background-color: #48B98F;
